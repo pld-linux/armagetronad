@@ -7,7 +7,7 @@ Version:	0.2.8.2.1
 Release:	0.1
 License:	GPL
 Group:		X11/Applications/Games
-Source0:	http://dl.sourceforge.net/%{name}/%{name}-%{version}.src.tar.bz2
+Source0:	http://dl.sourceforge.net/armagetronad/%{name}-%{version}.src.tar.bz2
 # Source0-md5:	b09104b3af550fe590ff11bc1fd46e26
 #Source1:	%{name}.desktop
 #Source2:	%{name}.png
@@ -24,10 +24,10 @@ BuildRequires:	unzip
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 # it installs data in %{_prefix}/games, so...
-#%define		_bindir			/usr/bin
-#%define		_prefix			/usr/%{_lib}
-#%define		_sysconfdir		/etc/%{name}
-#%define		_sysconfdir_server 	/etc/%{name}-server
+%define		_bindir			/usr/bin
+%define		_prefix			/usr/%{_lib}
+#define		_sysconfdir		/etc/%{name}
+%define		_sysconfdir_server 	/etc/%{name}-server
 
 %description
 In Armagetron, you ride a lightcycle around the game grid. You can
@@ -74,7 +74,7 @@ Serwer Armagetrona.
 %prep
 %setup -q -a3
 
-#sed -i -e 's@/usr/lib@/usr/%{_lib}@;s@X11R6/lib@X11R6/%{_lib}@' configure.in
+#sed -i -e 's@/usr/lib@/usr/%{_lib}@;s@X11R6/lib@%{_lib}@' configure.in
 
 %build
 
