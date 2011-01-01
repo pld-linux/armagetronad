@@ -3,12 +3,12 @@
 Summary:	A Tron lightcycle game with focus on multiplayer mode
 Summary(pl.UTF-8):	Gra Tron ze światłocyklem skupiająca się na trybie dla wielu graczy
 Name:		armagetronad
-Version:	0.2.8.2.1
+Version:	0.2.8.3.1
 Release:	0.1
-License:	GPL
+License:	GPL v3+
 Group:		X11/Applications/Games
-Source0:	http://dl.sourceforge.net/armagetronad/%{name}-%{version}.src.tar.bz2
-# Source0-md5:	b09104b3af550fe590ff11bc1fd46e26
+Source0:	http://downloads.sourceforge.net/armagetronad/%{name}-%{version}.src.tar.bz2
+# Source0-md5:	d4957ee0c2d3ae9d630d1362a6dcee70
 #Source1:	%{name}.desktop
 #Source2:	%{name}.png
 Source3:	http://armagetron.sourceforge.net/addons/moviepack.zip
@@ -19,6 +19,7 @@ BuildRequires:	SDL_image-devel
 BuildRequires:	SDL_mixer-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
+BuildRequires:	libxml2-devel
 BuildRequires:	sed >= 4.0
 BuildRequires:	unzip
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -78,6 +79,10 @@ Serwer Armagetrona.
 
 %build
 
+%{__aclocal}
+%{__autoconf}
+%{__autoheader}
+%{__automake}
 %configure \
 	--disable-glout \
 	--enable-games \
@@ -97,7 +102,7 @@ install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir},%{_bindir}} \
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-#mv -f $RPM_BUILD_ROOT%{_prefix}/bin/* $RPM_BUILD_ROOT%{_bindir}
+#mv -f $RPM_BUILD_ROOT%{_bindir}/* $RPM_BUILD_ROOT%{_bindir}
 
 #install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
 #install %{SOURCE2} $RPM_BUILD_ROOT%{_pixmapsdir}
@@ -136,11 +141,11 @@ rm -rf $RPM_BUILD_ROOT
 %doc moviepack/art_read_me.txt
 %{_prefix}/games/%{name}/moviepack
 
-%files server 
+%files server
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/armagetronad-dedicated
 %dir %{_prefix}/games/armagetronad-dedicated
-%{_prefix}/share/games/armagetronad-dedicated/bin
+%{_datadir}/games/armagetronad-dedicated/bin
 %attr(755,root,root) %{_prefix}/games/armagetronad-dedicated/bin/*
 %exclude %{_prefix}/games/armagetronad-dedicated/bin/uninstall
 %{_prefix}/games/armagetronad-dedicated/language
