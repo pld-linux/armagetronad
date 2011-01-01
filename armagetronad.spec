@@ -17,8 +17,6 @@ URL:		http://armagetronad.net/
 BuildRequires:	OpenGL-devel
 BuildRequires:	SDL_image-devel
 BuildRequires:	SDL_mixer-devel
-BuildRequires:	autoconf
-BuildRequires:	automake
 BuildRequires:	libxml2-devel
 BuildRequires:	sed >= 4.0
 BuildRequires:	unzip
@@ -78,11 +76,6 @@ Serwer Armagetrona.
 #sed -i -e 's@/usr/lib@/usr/%{_lib}@;s@X11R6/lib@%{_lib}@' configure.in
 
 %build
-
-%{__aclocal}
-%{__autoconf}
-%{__autoheader}
-%{__automake}
 %configure \
 	--disable-glout \
 	--enable-games \
@@ -95,9 +88,9 @@ Serwer Armagetrona.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir},%{_bindir}} \
-	$RPM_BUILD_ROOT%{_prefix}/games/%{name}/moviepack \
-	$RPM_BUILD_ROOT%{_sysconfdir_server}
+#install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir},%{_bindir}} \
+#	$RPM_BUILD_ROOT%{_prefix}/games/%{name}/moviepack \
+#	$RPM_BUILD_ROOT%{_sysconfdir_server}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
