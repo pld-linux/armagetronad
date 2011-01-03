@@ -18,8 +18,8 @@ BuildRequires:	OpenGL-devel
 BuildRequires:	SDL_image-devel
 BuildRequires:	SDL_mixer-devel
 BuildRequires:	libjpeg-devel
-BuildRequires:	libxml2-devel
 BuildRequires:	libpng-devel >= 2:1.4.0
+BuildRequires:	libxml2-devel
 BuildRequires:	sed >= 4.0
 BuildRequires:	unzip
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -121,33 +121,31 @@ rm -rf $RPM_BUILD_ROOT
 #%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/*.cfg
 #%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/*.srv
 %attr(755,root,root) %{_bindir}/%{name}
-%dir %{_prefix}/share
-%dir %{_prefix}/share/games
-%dir %{_prefix}/share/games/armagetronad
-%dir %{_prefix}/share/games/armagetronad/language
-%{_prefix}/share/games/armagetronad/language/*.txt
-%dir %{_prefix}/share/games/armagetronad/models
-%{_prefix}/share/games/armagetronad/models/*.mod
-%dir %{_prefix}/share/games/armagetronad/resource
-%dir %{_prefix}/share/games/armagetronad/resource/included
-%{_prefix}/share/games/armagetronad/resource/included/*.dtd
-%dir %{_prefix}/share/games/armagetronad/resource/included/AATeam
-%{_prefix}/share/games/armagetronad/resource/included/AATeam/*.dtd
-%dir %{_prefix}/share/games/armagetronad/resource/included/Anonymous
-%dir %{_prefix}/share/games/armagetronad/resource/included/Anonymous/polygon
-%dir %{_prefix}/share/games/armagetronad/resource/included/Anonymous/polygon/regular
-%{_prefix}/share/games/armagetronad/resource/included/Anonymous/polygon/regular/*.xml
-%dir %{_prefix}/share/games/armagetronad/resource/included/Your_mom
-%dir %{_prefix}/share/games/armagetronad/resource/included/Your_mom/clever
-%{_prefix}/share/games/armagetronad/resource/included/Your_mom/clever/*.xml
-%dir %{_prefix}/share/games/armagetronad/resource/included/Z-Man
-%dir %{_prefix}/share/games/armagetronad/resource/included/Z-Man/fortress
-%{_prefix}/share/games/armagetronad/resource/included/Z-Man/fortress/*.xml
-%dir %{_prefix}/share/games/armagetronad/sound
-%{_prefix}/share/games/armagetronad/sound/*.wav
-%dir %{_prefix}/share/games/armagetronad/textures
-%{_prefix}/share/games/armagetronad/textures/*.jpg
-%{_prefix}/share/games/armagetronad/textures/*.png
+%dir %{_datadir}/games/armagetronad
+%dir %{_datadir}/games/armagetronad/language
+%{_datadir}/games/armagetronad/language/*.txt
+%dir %{_datadir}/games/armagetronad/models
+%{_datadir}/games/armagetronad/models/*.mod
+%dir %{_datadir}/games/armagetronad/resource
+%dir %{_datadir}/games/armagetronad/resource/included
+%{_datadir}/games/armagetronad/resource/included/*.dtd
+%dir %{_datadir}/games/armagetronad/resource/included/AATeam
+%{_datadir}/games/armagetronad/resource/included/AATeam/*.dtd
+%dir %{_datadir}/games/armagetronad/resource/included/Anonymous
+%dir %{_datadir}/games/armagetronad/resource/included/Anonymous/polygon
+%dir %{_datadir}/games/armagetronad/resource/included/Anonymous/polygon/regular
+%{_datadir}/games/armagetronad/resource/included/Anonymous/polygon/regular/*.xml
+%dir %{_datadir}/games/armagetronad/resource/included/Your_mom
+%dir %{_datadir}/games/armagetronad/resource/included/Your_mom/clever
+%{_datadir}/games/armagetronad/resource/included/Your_mom/clever/*.xml
+%dir %{_datadir}/games/armagetronad/resource/included/Z-Man
+%dir %{_datadir}/games/armagetronad/resource/included/Z-Man/fortress
+%{_datadir}/games/armagetronad/resource/included/Z-Man/fortress/*.xml
+%dir %{_datadir}/games/armagetronad/sound
+%{_datadir}/games/armagetronad/sound/*.wav
+%dir %{_datadir}/games/armagetronad/textures
+%{_datadir}/games/armagetronad/textures/*.jpg
+%{_datadir}/games/armagetronad/textures/*.png
 %if 0
 #%attr(755,root,root) %{_bindir}/%{name}-stat
 #%dir %{_prefix}/games/%{name}
