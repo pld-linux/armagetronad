@@ -17,16 +17,12 @@ URL:		http://armagetronad.net/
 BuildRequires:	OpenGL-devel
 BuildRequires:	SDL_image-devel
 BuildRequires:	SDL_mixer-devel
+BuildRequires:	libjpeg-devel
 BuildRequires:	libxml2-devel
+BuildRequires:	libpng-devel >= 2:1.4.0
 BuildRequires:	sed >= 4.0
 BuildRequires:	unzip
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-
-# it installs data in %{_prefix}/games, so...
-%define		_bindir			/usr/bin
-%define		_prefix			/usr/%{_lib}
-#define		_sysconfdir		/etc/%{name}
-%define		_sysconfdir_server 	/etc/%{name}-server
 
 %description
 In Armagetron, you ride a lightcycle around the game grid. You can
@@ -73,16 +69,25 @@ Serwer Armagetrona.
 %prep
 %setup -q -a3
 
+# fix build with libpng >= 2:1.4.0
+%{__sed} -i 's/png_check_sig/png_sig_cmp/' configure.ac
 #sed -i -e 's@/usr/lib@/usr/%{_lib}@;s@X11R6/lib@%{_lib}@' configure.in
 
 %build
+%{__aclocal}
+%{__autoconf}
+%{__autoheader}
+%{__automake}
 %configure \
-	--disable-glout \
-	--enable-games \
-	--enable-main \
-	--enable-master \
-	--enable-music \
-	--disable-initscripts
+	--disable-sysinstall \
+	--disable-uninstall
+#	--disable-glout \
+#	--enable-games \
+#	--enable-main \
+#	--enable-master \
+#	--enable-music \
+#	--disable-initscripts \
+#	--disable-useradd
 
 %{__make}
 
@@ -109,11 +114,41 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-#%doc CHANGELOG doc/*.html doc/net
-#%dir %{_sysconfdir}
+%doc AUTHORS ChangeLog NEWS src/doc/{*.html,net}
+%dir %{_sysconfdir}/games
+%dir %{_sysconfdir}/games/%{name}
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/games/%{name}/*.cfg
 #%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/*.cfg
 #%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/*.srv
-#%attr(755,root,root) %{_bindir}/%{name}
+%attr(755,root,root) %{_bindir}/%{name}
+%dir %{_prefix}/share
+%dir %{_prefix}/share/games
+%dir %{_prefix}/share/games/armagetronad
+%dir %{_prefix}/share/games/armagetronad/language
+%{_prefix}/share/games/armagetronad/language/*.txt
+%dir %{_prefix}/share/games/armagetronad/models
+%{_prefix}/share/games/armagetronad/models/*.mod
+%dir %{_prefix}/share/games/armagetronad/resource
+%dir %{_prefix}/share/games/armagetronad/resource/included
+%{_prefix}/share/games/armagetronad/resource/included/*.dtd
+%dir %{_prefix}/share/games/armagetronad/resource/included/AATeam
+%{_prefix}/share/games/armagetronad/resource/included/AATeam/*.dtd
+%dir %{_prefix}/share/games/armagetronad/resource/included/Anonymous
+%dir %{_prefix}/share/games/armagetronad/resource/included/Anonymous/polygon
+%dir %{_prefix}/share/games/armagetronad/resource/included/Anonymous/polygon/regular
+%{_prefix}/share/games/armagetronad/resource/included/Anonymous/polygon/regular/*.xml
+%dir %{_prefix}/share/games/armagetronad/resource/included/Your_mom
+%dir %{_prefix}/share/games/armagetronad/resource/included/Your_mom/clever
+%{_prefix}/share/games/armagetronad/resource/included/Your_mom/clever/*.xml
+%dir %{_prefix}/share/games/armagetronad/resource/included/Z-Man
+%dir %{_prefix}/share/games/armagetronad/resource/included/Z-Man/fortress
+%{_prefix}/share/games/armagetronad/resource/included/Z-Man/fortress/*.xml
+%dir %{_prefix}/share/games/armagetronad/sound
+%{_prefix}/share/games/armagetronad/sound/*.wav
+%dir %{_prefix}/share/games/armagetronad/textures
+%{_prefix}/share/games/armagetronad/textures/*.jpg
+%{_prefix}/share/games/armagetronad/textures/*.png
+%if 0
 #%attr(755,root,root) %{_bindir}/%{name}-stat
 #%dir %{_prefix}/games/%{name}
 #%{_prefix}/games/%{name}/arenas
@@ -128,14 +163,16 @@ rm -rf $RPM_BUILD_ROOT
 #%{_prefix}/games/%{name}/textures
 #%{_desktopdir}/*.desktop
 #%{_pixmapsdir}/*
+%endif
 
 %files moviepack
 %defattr(644,root,root,755)
-%doc moviepack/art_read_me.txt
-%{_prefix}/games/%{name}/moviepack
+#%%doc moviepack/art_read_me.txt
+#%%{_prefix}/games/%{name}/moviepack
 
 %files server
 %defattr(644,root,root,755)
+%if 0
 %attr(755,root,root) %{_bindir}/armagetronad-dedicated
 %dir %{_prefix}/games/armagetronad-dedicated
 %{_datadir}/games/armagetronad-dedicated/bin
@@ -145,3 +182,4 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_sysconfdir_server}
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir_server}/*.cfg
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir_server}/*.srv
+%endif
