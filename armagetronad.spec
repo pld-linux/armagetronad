@@ -1,5 +1,7 @@
 #
-# TODO: start scripts for server
+# TODO: - start scripts for server
+#	- fix build on 64 bits
+#
 Summary:	A Tron lightcycle game with focus on multiplayer mode
 Summary(pl.UTF-8):	Gra Tron ze światłocyklem skupiająca się na trybie dla wielu graczy
 Name:		armagetronad
@@ -71,7 +73,6 @@ Serwer Armagetrona.
 
 # fix build with libpng >= 2:1.4.0
 %{__sed} -i 's/png_check_sig/png_sig_cmp/' configure.ac
-#sed -i -e 's@/usr/lib@/usr/%{_lib}@;s@X11R6/lib@%{_lib}@' configure.in
 
 %build
 %{__aclocal}
@@ -79,6 +80,7 @@ Serwer Armagetrona.
 %{__autoheader}
 %{__automake}
 %configure \
+	--enable-music \
 	--disable-sysinstall \
 	--disable-uninstall
 #	--disable-glout \
@@ -99,8 +101,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
-
-#mv -f $RPM_BUILD_ROOT%{_bindir}/* $RPM_BUILD_ROOT%{_bindir}
 
 #install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
 #install %{SOURCE2} $RPM_BUILD_ROOT%{_pixmapsdir}
@@ -146,22 +146,6 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/games/armagetronad/textures
 %{_datadir}/games/armagetronad/textures/*.jpg
 %{_datadir}/games/armagetronad/textures/*.png
-%if 0
-#%attr(755,root,root) %{_bindir}/%{name}-stat
-#%dir %{_prefix}/games/%{name}
-#%{_prefix}/games/%{name}/arenas
-#%dir %{_prefix}/games/%{name}/bin
-#%attr(755,root,root) %{_prefix}/games/%{name}/bin/[ap]*
-#%dir %{_prefix}/games/%{name}/language
-#%{_prefix}/games/%{name}/language/languages.txt
-#%{_prefix}/games/%{name}/language/english.txt
-#%lang(de) %{_prefix}/games/%{name}/language/deutsch.txt
-#%{_prefix}/games/%{name}/models
-#%{_prefix}/games/%{name}/sound
-#%{_prefix}/games/%{name}/textures
-#%{_desktopdir}/*.desktop
-#%{_pixmapsdir}/*
-%endif
 
 %files moviepack
 %defattr(644,root,root,755)
