@@ -36,14 +36,14 @@ to drive close to the dangerous walls. Prepare for exciting strategic
 preparations followed by action-packed close combat!
 
 %description -l pl.UTF-8
-W grze Armagetron jedzie się światłocyklem dookoła planszy. Można
-wykonywać tylko ostre zakręty o 90 stopni, a za graczem ciągle buduje
-się ściana. Trzeba spowodować, by wrogowie roztrzaskali się na tej
-ścianie, ale także uważać, bo oni próbują zrobić to samo. Jeśli gracz
-jest szybki, może złapać ich wszystkich, ale jedynym sposobem na
-przyspieszenie światłocyklu jest jazda blisko niebezpiecznych ścian.
-Trzeba się przygotować na ekscytujące strategiczne przygotowania i
-następującą po nich walkę w zbliżeniu!
+W grze Armagetron jeździ się światłocyklem po planszy. Można wykonywać
+tylko ostre zakręty o 90 stopni, a za graczem ciągle buduje się mur.
+Trzeba spowodować, by wrogowie roztrzaskali się na tym murze, ale
+także uważać, bo oni próbują zrobić to samo. Jeśli gracz jest szybki,
+może złapać ich wszystkich, ale jedynym sposobem na przyspieszenie
+światłocyklu jest jazda blisko niebezpiecznych ścian. Trzeba się
+przygotować na ekscytujące strategiczne przygotowania i następującą po
+nich walkę w zbliżeniu!
 
 %package moviepack
 Summary:	Moviepack addon
