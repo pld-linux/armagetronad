@@ -1,6 +1,7 @@
 #
 # TODO: - start scripts for server
 #	- fix build on 64 bits
+#	- re-enable server
 #
 Summary:	A Tron lightcycle game with focus on multiplayer mode
 Summary(pl.UTF-8):	Gra Tron ze światłocyklem skupiająca się na trybie dla wielu graczy
